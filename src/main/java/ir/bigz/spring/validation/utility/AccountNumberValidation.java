@@ -7,12 +7,6 @@ public interface AccountNumberValidation extends Predicate<String> {
 
     static AccountNumberValidation isAccountNumberValid(String regex){
         Pattern pattern = Pattern.compile(regex);
-        return accountNumber -> {
-            if(pattern.matcher(accountNumber).matches()){
-                return true;
-            }else{
-                return false;
-            }
-        };
+        return accountNumber -> pattern.matcher(accountNumber).matches();
     }
 }
