@@ -1,9 +1,18 @@
 package ir.bigz.spring.validation.utility;
 
-import org.springframework.stereotype.Service;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
 
-@Service
-public interface AccountNumberValidation {
+public interface AccountNumberValidation extends Predicate<String> {
 
-    boolean isValid(String accountNumber);
+    static AccountNumberValidation isAccountNumberValid(String regex){
+        Pattern pattern = Pattern.compile(regex);
+        return accountNumber -> {
+            if(pattern.matcher(accountNumber).matches()){
+                return true;
+            }else{
+                return false;
+            }
+        };
+    }
 }

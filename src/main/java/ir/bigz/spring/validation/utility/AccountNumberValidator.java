@@ -9,15 +9,14 @@ import javax.validation.ConstraintValidatorContext;
 @Service
 public class AccountNumberValidator implements ConstraintValidator<AccountCode, String> {
 
-    private final AccountNumberValidation accountNumberValidation;
-
-    public AccountNumberValidator(AccountNumberValidation accountNumberValidation) {
-        this.accountNumberValidation = accountNumberValidation;
-    }
-
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        return accountNumberValidation.isValid(s);
+
+        return (s.getBytes().length == 16) ?
+                AccountNumberValidation.isAccountNumberValid("^\\d{4}-\\d{2}-\\d{6}-\\d$").test(s) :
+                (s.getBytes().length == 17 && AccountNumberValidation.isAccountNumberValid("^\\d{4}-\\d{3}-\\d{6}-\\d$")
+                .test(s));
+
     }
 
     @Override
