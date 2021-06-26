@@ -1,12 +1,15 @@
 package ir.bigz.spring.validation.service;
 
+import ir.bigz.spring.validation.dto.UserDto;
 import ir.bigz.spring.validation.model.User;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
 
-    void addUsers(User user);
+    void addUsers(UserDto user);
 
-    User getUser(long userId);
+    UserDto getUser(long userId);
+
+    UserDto getUserByName(String name);
 }
