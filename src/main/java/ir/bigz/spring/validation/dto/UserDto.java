@@ -2,6 +2,8 @@ package ir.bigz.spring.validation.dto;
 
 import ir.bigz.spring.validation.annotation.AccountCode;
 import ir.bigz.spring.validation.annotation.NationalCode;
+import ir.bigz.spring.validation.annotation.Validator;
+import ir.bigz.spring.validation.utility.Validations;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,16 +36,21 @@ public class UserDto {
     @AccountCode
     protected String accountNumber;
 
+    @Validator(Validations.EMAIL)
+    protected String email;
+
 
     public UserDto(@NotBlank(message = "name not blank") String userName,
-                @NotBlank(message = "lastName not blank") String name,
-                @NationalCode @NotNull(message = "national code not null") String nationalCode,
-                @Pattern(regexp = "^(09|989)\\d{9}$", message = "mobile is not correct") String mobile,
-                @AccountCode String accountNumber) {
+                   @NotBlank(message = "lastName not blank") String name,
+                   @NationalCode @NotNull(message = "national code not null") String nationalCode,
+                   @Pattern(regexp = "^(09|989)\\d{9}$", message = "mobile is not correct") String mobile,
+                   @AccountCode String accountNumber,
+                   @Validator(Validations.EMAIL) String email) {
         this.userName = userName;
         this.name = name;
         this.nationalCode = nationalCode;
         this.mobile = mobile;
         this.accountNumber = accountNumber;
+        this.email = email;
     }
 }

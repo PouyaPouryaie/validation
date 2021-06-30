@@ -23,8 +23,13 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void addUsers(UserDto userDto) {
-        User user = new ObjectMapper().convertValue(userDto, User.class);
-        User save = userRepository.save(user);
+        if(checkUserUnique(userDto.getUserName())){
+            throw new IllegalArgumentException("userName is duplicated");
+        }
+        else{
+            User user = new ObjectMapper().convertValue(userDto, User.class);
+            User save = userRepository.save(user);
+        }
     }
 
     @Override
@@ -40,4 +45,9 @@ public class UserServiceImpl implements UserService{
                 .map(user1 -> new ObjectMapper().convertValue(user1, UserDto.class));
         return userDto.get();
     }
+
+    private boolean checkUserUnique(String userName){
+        return userRepository.findByName(userName).isPresent();
+    }
+
 }
