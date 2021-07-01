@@ -30,18 +30,22 @@ public class User {
 
     protected String email;
 
+    protected String gender;
+
 
     public User(String userName,
                 String name,
                 String nationalCode,
                 String mobile,
                 String accountNumber,
-                String email) {
+                String email,
+                String gender) {
         this.userName = userName;
         this.name = name;
         this.nationalCode = nationalCode;
         this.mobile = mobile;
         this.accountNumber = accountNumber;
         this.email = email;
+        this.gender = gender;
     }
 }

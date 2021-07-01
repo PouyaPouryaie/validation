@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService{
         }
         else{
             User user = new ObjectMapper().convertValue(userDto, User.class);
-            User save = userRepository.save(user);
+            userRepository.save(user);
         }
     }
 

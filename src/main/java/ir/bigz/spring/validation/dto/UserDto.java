@@ -1,6 +1,7 @@
 package ir.bigz.spring.validation.dto;
 
 import ir.bigz.spring.validation.annotation.AccountCode;
+import ir.bigz.spring.validation.annotation.GenderType;
 import ir.bigz.spring.validation.annotation.NationalCode;
 import ir.bigz.spring.validation.annotation.Validator;
 import ir.bigz.spring.validation.utility.Validations;
@@ -39,18 +40,23 @@ public class UserDto {
     @Validator(Validations.EMAIL)
     protected String email;
 
+    @GenderType(allowed = {"man", "woman", "transgender"})
+    protected String gender;
+
 
     public UserDto(@NotBlank(message = "name not blank") String userName,
                    @NotBlank(message = "lastName not blank") String name,
                    @NationalCode @NotNull(message = "national code not null") String nationalCode,
                    @Pattern(regexp = "^(09|989)\\d{9}$", message = "mobile is not correct") String mobile,
                    @AccountCode String accountNumber,
-                   @Validator(Validations.EMAIL) String email) {
+                   @Validator(Validations.EMAIL) String email,
+                   @GenderType String gender) {
         this.userName = userName;
         this.name = name;
         this.nationalCode = nationalCode;
         this.mobile = mobile;
         this.accountNumber = accountNumber;
         this.email = email;
+        this.gender = gender;
     }
 }
